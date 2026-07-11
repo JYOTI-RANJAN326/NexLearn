@@ -1,10 +1,9 @@
 const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
-    console.log("MAIL_HOST =", process.env.MAIL_HOST);
   try {
-    console.log("MAIL_HOST =", process.env.MAIL_HOST);
-console.log("MAIL_USER =", process.env.MAIL_USER);
+    console.log("STEP 1");
+
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: 587,
@@ -15,12 +14,20 @@ console.log("MAIL_USER =", process.env.MAIL_USER);
       },
     });
 
+    console.log("STEP 2 - Transport Created");
+
+    await transporter.verify();
+    console.log("STEP 3 - SMTP Verified");
+
     const info = await transporter.sendMail({
       from: `"NexLearn" <${process.env.MAIL_USER}>`,
       to: email,
       subject: title,
       html: body,
     });
+
+    console.log("STEP 4 - Mail Sent");
+    console.log(info);
 
     return info;
   } catch (error) {
