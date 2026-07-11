@@ -16,7 +16,7 @@ const mailSender = async (email, title, body) => {
 
     console.log("STEP 2 - Transport Created");
 
-    await transporter.verify();
+   // await transporter.verify();
     console.log("STEP 3 - SMTP Verified");
 
     const info = await transporter.sendMail({
