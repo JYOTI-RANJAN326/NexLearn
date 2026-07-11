@@ -10,19 +10,22 @@ const mailSender = async (email, title, body) => {
     console.log("STEP 2 - Creating Transporter");
 
     const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+});
 
     console.log("STEP 3 - Before Verify");
 
-    await transporter.verify();
+  await transporter.verify().catch((err) => {
+  console.error("VERIFY ERROR");
+  console.error(err);
+  throw err;
+});
 
     console.log("✅ STEP 4 - SMTP Connected");
 
