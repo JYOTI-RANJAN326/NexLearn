@@ -1,7 +1,10 @@
 const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
+    console.log("MAIL_HOST =", process.env.MAIL_HOST);
   try {
+    console.log("MAIL_HOST =", process.env.MAIL_HOST);
+console.log("MAIL_USER =", process.env.MAIL_USER);
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: 587,

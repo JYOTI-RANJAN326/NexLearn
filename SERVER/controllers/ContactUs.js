@@ -59,51 +59,21 @@ const mailSender = require("../utils/mailSender");
 // };
 exports.contactUsController = async (req, res) => {
   try {
-    console.log("STEP 1");
+    const { email, firstname, lastname, message, phoneNo, countrycode } = req.body;
 
-    const {
+    console.log("CONTACT REQUEST:", req.body);
+
+    const emailRes = await mailSender(
       email,
-      firstname,
-      lastname,
-      message,
-      phoneNo,
-      countrycode,
-    } = req.body;
-
-    console.log("STEP 2");
-
-    await mailSender(
-      process.env.MAIL_USER,
-      `New Contact from ${firstname}`,
-      `
-        <h2>New Contact Request</h2>
-        <p>Name: ${firstname} ${lastname}</p>
-        <p>Email: ${email}</p>
-        <p>Phone: ${countrycode} ${phoneNo}</p>
-        <p>Message: ${message}</p>
-      `
+      "Your Data sent successfully",
+      contactUsEmail(email, firstname, lastname, message, phoneNo, countrycode)
     );
 
-    console.log("STEP 3");
-
-    await mailSender(
-      email,
-      "Thanks for contacting NexLearn",
-      contactUsEmail(
-        email,
-        firstname,
-        lastname,
-        message,
-        phoneNo,
-        countrycode
-      )
-    );
-
-    console.log("STEP 4");
+    console.log("EMAIL RESPONSE:", emailRes);
 
     return res.status(200).json({
       success: true,
-      message: "Message sent successfully",
+      message: "Email sent successfully",
     });
 
   } catch (error) {
@@ -112,6 +82,7 @@ exports.contactUsController = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: error.message,
+      stack: error.stack,
     });
   }
 };
