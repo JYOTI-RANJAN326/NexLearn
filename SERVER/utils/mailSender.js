@@ -1,32 +1,48 @@
 const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
-  console.log("MAIL_HOST:", process.env.MAIL_HOST);
-console.log("MAIL_USER:", process.env.MAIL_USER);
-console.log("MAIL_PASS:", process.env.MAIL_PASS ? "Present" : "Missing");
-    try{
-            let transporter = nodemailer.createTransport({
-                host:process.env.MAIL_HOST,
-                auth:{
-                    user: process.env.MAIL_USER,
-                    pass: process.env.MAIL_PASS,
-                }
-            })
+  try {
+    console.log("STEP 1");
+    console.log("MAIL_HOST:", process.env.MAIL_HOST);
+    console.log("MAIL_USER:", process.env.MAIL_USER);
+    console.log("MAIL_PASS:", process.env.MAIL_PASS ? "Present" : "Missing");
 
+    console.log("STEP 2 - Creating Transporter");
 
-            let info = await transporter.sendMail({
-                from: 'StudyNotion || CodeHelp - by Babbar',
-                to:`${email}`,
-                subject: `${title}`,
-                html: `${body}`,
-            })
-            console.log(info);
-            return info;
-    }
-    catch(error) {
-        console.log(error.message);
-    }
-}
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
 
+    console.log("STEP 3 - Before Verify");
+
+    await transporter.verify();
+
+    console.log("✅ STEP 4 - SMTP Connected");
+
+    console.log("STEP 5 - Before Send Mail");
+
+    const info = await transporter.sendMail({
+      from: `"NexLearn" <${process.env.MAIL_USER}>`,
+      to: email,
+      subject: title,
+      html: body,
+    });
+
+    console.log("✅ STEP 6 - Mail Sent");
+    console.log(info);
+
+    return info;
+  } catch (error) {
+    console.error("❌ MAIL ERROR:", error);
+    throw error;
+  }
+};
 
 module.exports = mailSender;
