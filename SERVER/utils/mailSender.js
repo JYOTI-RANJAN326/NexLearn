@@ -2,44 +2,15 @@ const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
   try {
-    console.log("STEP 1");
-    console.log("MAIL_HOST:", process.env.MAIL_HOST);
-    console.log("MAIL_USER:", process.env.MAIL_USER);
-    console.log("MAIL_PASS:", process.env.MAIL_PASS ? "Present" : "Missing");
-
-    console.log("STEP 2 - Creating Transporter");
-
-//     const transporter = nodemailer.createTransport({
-//   host: "smtp.gmail.com",
-//   port: 465,
-//   secure: true,
-//   auth: {
-//     user: process.env.MAIL_USER,
-//     pass: process.env.MAIL_PASS,
-//   },
-// });
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
-
-    console.log("STEP 3 - Before Verify");
-
-  await transporter.verify().catch((err) => {
-  console.error("VERIFY ERROR");
-  console.error(err);
-  throw err;
-});
-
-    console.log("✅ STEP 4 - SMTP Connected");
-
-    console.log("STEP 5 - Before Send Mail");
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
 
     const info = await transporter.sendMail({
       from: `"NexLearn" <${process.env.MAIL_USER}>`,
@@ -48,12 +19,9 @@ const transporter = nodemailer.createTransport({
       html: body,
     });
 
-    console.log("✅ STEP 6 - Mail Sent");
-    console.log(info);
-
     return info;
   } catch (error) {
-    console.error("❌ MAIL ERROR:", error);
+    console.error("MAIL ERROR:", error);
     throw error;
   }
 };
