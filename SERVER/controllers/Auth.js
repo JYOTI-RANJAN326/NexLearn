@@ -7,7 +7,7 @@ const mailSender = require("../utils/mailSender")
 const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 const Profile = require("../models/Profile")
 require("dotenv").config()
-
+//const emailTemplate = require("../mail/templates/emailVerificationTemplate");
 // Signup Controller for Registering USers
 
 exports.signup = async (req, res) => {
@@ -213,15 +213,36 @@ exports.sendotp = async (req, res) => {
       })
     }
     const otpPayload = { email, otp }
+    console.log("Before OTP.create");
     const otpBody = await OTP.create(otpPayload)
-    console.log("OTP Body", otpBody)
+    console.log("OTP Body", otpBody);
+    console.log("BEFORE RESPONSE");
+
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,
       otp,
     })
+//     const otpPayload = { email, otp };
+
+// // Save OTP first
+// const otpBody = await OTP.create(otpPayload);
+
+// console.log("OTP Body", otpBody);
+
+// // Send email
+// await mailSender(
+//     email,
+//     "Verification Email",
+//     emailTemplate(otp)
+// );
+
+return res.status(200).json({
+    success: true,
+    message: "OTP Sent Successfully",
+});
   } catch (error) {
-    console.log(error.message)
+    console.log("SEND OTP ERROR:", error)
     return res.status(500).json({ success: false, error: error.message })
   }
 }
