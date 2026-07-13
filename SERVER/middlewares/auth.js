@@ -24,18 +24,33 @@ exports.auth = async (req, res, next) => {
 			return res.status(401).json({ success: false, message: `Token Missing` });
 		}
 
-		try {
-			// Verifying the JWT using the secret key stored in environment variables
-			const decode = await jwt.verify(token, process.env.JWT_SECRET);
-			console.log(decode);
-			// Storing the decoded JWT payload in the request object for further use
-			req.user = decode;
-		} catch (error) {
-			// If JWT verification fails, return 401 Unauthorized response
-			return res
-				.status(401)
-				.json({ success: false, message: "token is invalid" });
-		}
+		// try {
+		// 	// Verifying the JWT using the secret key stored in environment variables
+		// 	//const decode = await jwt.verify(token, process.env.JWT_SECRET);
+		// 	//console.log(decode);
+		
+		// 	// Storing the decoded JWT payload in the request object for further use
+		// 	req.user = decode;
+		// } catch (error) {
+		// 	// If JWT verification fails, return 401 Unauthorized response
+		// 	return res
+		// 		.status(401)
+		// 		.json({ success: false, message: "token is invalid" });
+		// }
+			try {
+  const decode = jwt.verify(token, process.env.JWT_SECRET);
+  console.log("JWT VERIFIED");
+  req.user = decode;
+} catch (err) {
+  console.log("JWT VERIFY ERROR:", err.message);
+  console.log("TOKEN:", token);
+  console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
+  return res.status(401).json({
+    success: false,
+    message: "token is invalid",
+  });
+}
 
 		// If JWT is valid, move on to the next middleware or request handler
 		next();
