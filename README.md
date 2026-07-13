@@ -8,6 +8,13 @@
 
   NexLearn is a full-stack AI-powered EdTech platform that connects students and instructors in one interactive learning ecosystem.
 
+  <br />
+   [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Website-blue?style=for-the-badge)](https://nex-learn-two.vercel.app/)
+  [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)]()
+  [![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=node.js&logoColor=white)]()
+  [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)]()
+
+
 </div>
 
 ---
@@ -315,6 +322,22 @@ SERVER/node_modules/
 - Instructor AI assistant
 - Real-time notifications
   
+
+
+---
+
+## 🔗 Project Links
+
+### 🌐 Live Website
+https://nex-learn-two.vercel.app/
+
+### 💻 GitHub Repository
+https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME
+
+### 📧 Contact
+
+- **Email:** ranjanjyoti27022006@gmail.com
+- **LinkedIn:** https://linkedin.com/in/YOUR-LINKEDIN
 
 ---
 
