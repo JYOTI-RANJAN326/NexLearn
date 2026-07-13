@@ -11,6 +11,11 @@
 </div>
 
 ---
+## 🌐 Live Demo
+
+🚀 **Frontend:** https://nex-learn-two.vercel.app/
+
+---
 
 ## 📌 About NexLearn
 
