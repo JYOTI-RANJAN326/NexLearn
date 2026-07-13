@@ -336,12 +336,12 @@ SERVER/node_modules/
 https://nex-learn-two.vercel.app/
 
 ### 💻 GitHub Repository
-https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME
+https://github.com/JYOTI-RANJAN326/NexLearn.git
 
 ### 📧 Contact
 
 - **Email:** ranjanjyoti27022006@gmail.com
-- **LinkedIn:** https://linkedin.com/in/YOUR-LINKEDIN
+- **LinkedIn:** https://www.linkedin.com/in/jyoti-ranjan-a304b3327?utm_source=share_via&utm_content=profile&utm_medium=member_android
 
 ---
 
