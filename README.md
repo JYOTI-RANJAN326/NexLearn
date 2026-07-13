@@ -13,7 +13,7 @@
 ---
 ## 🌐 Live Demo
 
-🚀 **Frontend:** https://nex-learn-two.vercel.app/
+🚀 **NexLearn:** https://nex-learn-two.vercel.app/
 
 ---
 
