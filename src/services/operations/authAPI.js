@@ -73,12 +73,23 @@ export function signUp(
       }
       toast.success("Signup Successful")
       navigate("/login")
-    } catch (error) {
-     console.log("SIGNUP API ERROR............", error)
-     console.log("BACKEND MESSAGE:", error.response?.data)
-      toast.error("Signup Failed")
-      navigate("/signup")
-    }
+    // } catch (error) {
+    //  console.log("SIGNUP API ERROR............", error)
+    //  console.log("BACKEND MESSAGE:", error.response?.data)
+    //   toast.error("Signup Failed")
+    //   navigate("/signup")
+    // }
+    }catch (error) {
+  console.log("SIGNUP API ERROR............", error);
+
+  const message =
+    error.response?.data?.message ||
+    error.message ||
+    "Signup Failed";
+
+  toast.error(message);
+  navigate("/signup");
+}
     dispatch(setLoading(false))
     toast.dismiss(toastId)
   }
@@ -111,9 +122,16 @@ export function login(email, password, navigate) {
       localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
     } catch (error) {
-      console.log("LOGIN API ERROR............", error)
-      toast.error("Login Failed")
-    }
+  console.log("LOGIN API ERROR............", error);
+
+  const message =
+    error.response?.data?.message ||
+    error.message ||
+    "Login Failed";
+    navigate("/login")
+  toast.error(message);
+  navigate("/login");
+}
     dispatch(setLoading(false))
     toast.dismiss(toastId)
   }

@@ -1,6 +1,7 @@
 // Icons Import
 import { FaArrowRight } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux";
 
 // Image and Video Import
 import Banner from "../assets/Images/banner.mp4"
@@ -16,6 +17,7 @@ import LearningLanguageSection from "../components/core/HomePage/LearningLanguag
 import TimelineSection from "../components/core/HomePage/TimelineSection"
 
 function Home() {
+  const { token } = useSelector((state) => state.auth);
   return (
    <div className="bg-gradient-to-b from-slate-950 via-slate-900 to-black min-h-screen">
       {/* Section 1 */}
@@ -53,15 +55,32 @@ function Home() {
   receive AI-powered course recommendations, track your progress,
   and become industry-ready—all in one platform.
 </div>
-        {/* CTA Buttons */}
-       <div className="mt-10 flex flex-wrap justify-center gap-5">
+      
+        {/* <div className="mt-10 flex flex-wrap justify-center gap-5">
+       
           <CTAButton active={true} linkto={"/signup"}>
             Explore Courses
           </CTAButton>
           <CTAButton active={false} linkto={"/login"}>
             Get Started Free
           </CTAButton>
-        </div>
+        </div> */}
+        <div className="mt-10 flex flex-wrap justify-center gap-5">
+  <CTAButton
+    active={true}
+      linkto={token ? "/catalog/artificial-intelligence" : "/signup"}
+  >
+    Explore Courses
+  </CTAButton>
+
+  <CTAButton
+    active={false}
+    linkto={token ? "/dashboard/my-profile" : "/login"}
+  >
+    {token ? "Go to Dashboard" : "Get Started Free"}
+  </CTAButton>
+</div>
+
         <div className="mt-12 flex flex-wrap justify-center gap-10">
 
   <div className="text-center">
